@@ -2,15 +2,8 @@
 
 
 enum katana60_layers {
-    _BASE_V1,
-    _BASE_V2,
-    _BASE_V3,
-    _BASE_V4,
-    _BASE_V5,
-    _BASE_V6,
+    _BASE,
     _QWERTY,
-    _COLEMAK,
-    _DVORAK,
     _NUMPAD,
     _LOWER,
     _RAISE,
@@ -21,15 +14,8 @@ enum katana60_layers {
 
 enum katana60_keycodes {
     EPRM = SAFE_RANGE,
-    BASE_V1,
-    BASE_V2,
-    BASE_V3,
-    BASE_V4,
-    BASE_V5,
-    BASE_V6,
+    BASE,
     QWERTY,
-    COLEMAK,
-    DVORAK,
     LOWER,
     RAISE,
 };
@@ -72,117 +58,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * | Fn   | Ctrl  |  Alt  |  Cmd  |  Lower / Space  |  BS  |Raise / Space| Left | Down |  Up  |Right | App  |
      * `--------------------------------------------------------------------------------------------------------'
      */
-    [_BASE_V1] = LAYOUT(
+    [_BASE] = LAYOUT(
         KC_EQL,  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    NUMPAD,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSLS, KC_MINS,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC,          KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
         CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_HOME,          KC_PGUP, KC_H,    KC_J,    KC_K,    KC_L,    MOU_SCL, GUI_QUO,
         KC_LSFT, CTL_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_END,  KC_DEL,  KC_PGDN, KC_N,    KC_M,    KC_COMM, KC_DOT,  CTL_SLS, SFT_ENT,
         ADJ_TIL, KC_LCTL, KC_LALT, KC_LGUI,          LWR_SPC,          KC_BSPC,      RSE_SPC,     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, ADJ_GRV
-    ),
-
-    /*
-     * ,--------------------------------------------------------------------------------------------------------.
-     * | =    |  `   |  1   |  2   |  3   |  4   |  5   | Num  |  6   |  7   |  8   |  9   |  0   |  \   |  -   |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Tab      |  Q   |  W   |  E   |  R   |  T   |  [   |  ]   |  Y   |  U   |  I   |  O   |  P   |Backspace|
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Esc   |  A   |  S   |  D   |  F   |  G   | Home |||||| PgUp |  H   |  J   |  K   |  L   |  ;   | Enter |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Shift|  Z   |  X   |  C   |  V   |  B   | End  | Del  | PgDn |  N   |  M   |  ,   |  .   |  /   |  '   |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Fn   | Ctrl  |  Alt  |  Cmd  |  Lower / Space  |  BS  |Raise / Space| Left | Down |  Up  |Right | App  |
-     * `--------------------------------------------------------------------------------------------------------'
-     */
-    [_BASE_V2] = LAYOUT(
-        KC_EQL,  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    NUMPAD,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSLS, KC_MINS,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC,          KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-        CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_HOME,          KC_PGUP, KC_H,    KC_J,    KC_K,    KC_L,    MOU_SCL, GUI_ENT,
-        KC_LSFT, CTL_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_END,  KC_DEL,  KC_PGDN, KC_N,    KC_M,    KC_COMM, KC_DOT,  CTL_SLS, SFT_QUO,
-        ADJ_TIL, KC_LCTL, KC_LALT, KC_LGUI,          LWR_SPC,          KC_BSPC,      RSE_SPC,     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, ADJ_GRV
-    ),
-
-    /*
-     * ,--------------------------------------------------------------------------------------------------------.
-     * | \    |  `   |  1   |  2   |  3   |  4   |  5   | Num  |  6   |  7   |  8   |  9   |  0   |  -   |  =   |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Tab      |  Q   |  W   |  E   |  R   |  T   |  [   |  ]   |  Y   |  U   |  I   |  O   |  P   |Backspace|
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Esc   |  A   |  S   |  D   |  F   |  G   | Home |||||| PgUp |  H   |  J   |  K   |  L   |  ;   | Enter |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Shift|  Z   |  X   |  C   |  V   |  B   | End  | Del  | PgDn |  N   |  M   |  ,   |  .   |  /   |  '   |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Fn   | Ctrl  |  Alt  |  Cmd  |  Lower / Space  |  BS  |Raise / Space| Left | Down |  Up  |Right | App  |
-     * `--------------------------------------------------------------------------------------------------------'
-     */
-    [_BASE_V3] = LAYOUT(
-        KC_BSLS, KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    NUMPAD,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC,          KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-        CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_HOME,          KC_PGUP, KC_H,    KC_J,    KC_K,    KC_L,    MOU_SCL, GUI_ENT,
-        KC_LSFT, CTL_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_END,  KC_DEL,  KC_PGDN, KC_N,    KC_M,    KC_COMM, KC_DOT,  CTL_SLS, SFT_QUO,
-        ADJ_TIL, KC_LCTL, KC_LALT, KC_LGUI,          LWR_SPC,          KC_BSPC,      RSE_SPC,     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, ADJ_GRV
-    ),
-
-    /*
-     * ,--------------------------------------------------------------------------------------------------------.
-     * | Esc  |  `   |  1   |  2   |  3   |  4   |  5   | Num  |  6   |  7   |  8   |  9   |  0   |  -   |  =   |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Tab      |  Q   |  W   |  E   |  R   |  T   |  [   |  ]   |  Y   |  U   |  I   |  O   |  P   |    \    |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | BS    |  A   |  S   |  D   |  F   |  G   | Home |||||| PgUp |  H   |  J   |  K   |  L   |  ;   |   '   |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Shift|  Z   |  X   |  C   |  V   |  B   | End  | Del  | PgDn |  N   |  M   |  ,   |  .   |  /   | Enter|
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Fn   | Ctrl  |  Alt  |  Cmd  |  Lower / Space  |  BS  |Raise / Space| Left | Down |  Up  |Right | App  |
-     * `--------------------------------------------------------------------------------------------------------'
-     */
-    [_BASE_V4] = LAYOUT(
-        KC_GESC, KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    NUMPAD,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC,          KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
-        CTL_BSP, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_HOME,          KC_PGUP, KC_H,    KC_J,    KC_K,    KC_L,    MOU_SCL, GUI_QUO,
-        KC_LSFT, CTL_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_END,  KC_DEL,  KC_PGDN, KC_N,    KC_M,    KC_COMM, KC_DOT,  CTL_SLS, SFT_ENT,
-        ADJ_TIL, KC_LCTL, KC_LALT, KC_LGUI,          LWR_SPC,          KC_BSPC,      RSE_SPC,     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, ADJ_GRV
-    ),
-
-    /*
-     * ,--------------------------------------------------------------------------------------------------------.
-     * | Esc  |  `   |  1   |  2   |  3   |  4   |  5   | Num  |  6   |  7   |  8   |  9   |  0   |  -   |  =   |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Tab      |  Q   |  W   |  E   |  R   |  T   |  [   |  ]   |  Y   |  U   |  I   |  O   |  P   |    \    |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | BS    |  A   |  S   |  D   |  F   |  G   | Home |||||| PgUp |  H   |  J   |  K   |  L   |  ;   |   '   |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Shift|  Z   |  X   |  C   |  V   |  B   | End  | Del  | PgDn |  N   |  M   |  ,   |  .   |  /   | Enter|
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Fn   | Ctrl  |  Alt  |  Cmd  |  Lower / Space  |  BS  |Raise / Enter| Left | Down |  Up  |Right | App  |
-     * `--------------------------------------------------------------------------------------------------------'
-     */
-    [_BASE_V5] = LAYOUT(
-        KC_GESC, KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    NUMPAD,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC,          KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
-        CTL_BSP, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_HOME,          KC_PGUP, KC_H,    KC_J,    KC_K,    KC_L,    MOU_SCL, GUI_QUO,
-        KC_LSFT, CTL_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_END,  KC_DEL,  KC_PGDN, KC_N,    KC_M,    KC_COMM, KC_DOT,  CTL_SLS, SFT_ENT,
-        ADJ_TIL, KC_LCTL, KC_LALT, KC_LGUI,          LWR_SPC,          KC_BSPC,      RSE_ENT,     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, ADJ_GRV
-    ),
-
-    /*
-     * ,--------------------------------------------------------------------------------------------------------.
-     * | BS   |  `   |  1   |  2   |  3   |  4   |  5   | Num  |  6   |  7   |  8   |  9   |  0   |  -   |  =   |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Tab      |  Q   |  W   |  E   |  R   |  T   |  [   |  ]   |  Y   |  U   |  I   |  O   |  P   |    \    |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Esc   |  A   |  S   |  D   |  F   |  G   | Home |||||| PgUp |  H   |  J   |  K   |  L   |  ;   |   '   |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Shift|  Z   |  X   |  C   |  V   |  B   | End  | Del  | PgDn |  N   |  M   |  ,   |  .   |  /   | Enter|
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Fn   | Ctrl  |  Alt  |  Cmd  |Lower / Backspace|  BS  |Raise / Space| Left | Down |  Up  |Right | App  |
-     * `--------------------------------------------------------------------------------------------------------'
-     */
-    [_BASE_V6] = LAYOUT(
-        KC_BSPC, KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    NUMPAD,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC,          KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
-        CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_HOME,          KC_PGUP, KC_H,    KC_J,    KC_K,    KC_L,    MOU_SCL, GUI_QUO,
-        KC_LSFT, CTL_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_END,  KC_DEL,  KC_PGDN, KC_N,    KC_M,    KC_COMM, KC_DOT,  CTL_SLS, SFT_ENT,
-        ADJ_TIL, KC_LCTL, KC_LALT, KC_LGUI,          LWR_BSP,          KC_BSPC,      RSE_SPC,     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, ADJ_GRV
     ),
 
     /*
@@ -203,48 +84,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC,          KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
         CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_HOME,          KC_PGUP, KC_H,    KC_J,    KC_K,    KC_L,    MOU_SCL, GUI_ENT,
         KC_LSFT, CTL_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_END,  KC_DEL,  KC_PGDN, KC_N,    KC_M,    KC_COMM, KC_DOT,  CTL_SLS, SFT_QUO,
-        ADJ_TIL, KC_LCTL, KC_LALT, KC_LGUI,          LWR_SPC,          KC_BSPC,      RSE_SPC,     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, ADJ_BSL
-    ),
-
-    /*
-     * ,--------------------------------------------------------------------------------------------------------.
-     * | Esc  |  `   |  1   |  2   |  3   |  4   |  5   | Num  |  6   |  7   |  8   |  9   |  0   |  -   |  =   |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Tab      |  Q   |  W   |  F   |  P   |  G   |  [   |  ]   |  J   |  L   |  U   |  Y   |  ;   |Backspace|
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Ctrl  |  A   |  R   |  S   |  T   |  D   | Home |||||| PgUp |  H   |  N   |  E   |  I   |  O   | Enter |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Shift|  Z   |  X   |  C   |  V   |  B   | End  | Del  | PgDn |  K   |  M   |  ,   |  .   |  /   |  '   |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Fn   | Ctrl  |  Alt  |  Cmd  |  Lower / Space  |  BS  |Raise / Space| Left | Down |  Up  |Right | App  |
-     * `--------------------------------------------------------------------------------------------------------'
-     */
-    [_COLEMAK] = LAYOUT(
-        KC_GESC, KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    NUMPAD,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,
-        KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_LBRC,          KC_RBRC, KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
-        CTL_ESC, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_HOME,          KC_PGUP, KC_H,    KC_N,    KC_E,    KC_I,    MOU_O,   GUI_ENT,
-        KC_LSFT, CTL_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_END,  KC_DEL,  KC_PGDN, KC_K,    KC_M,    KC_COMM, KC_DOT,  CTL_SLS, SFT_QUO,
-        ADJ_TIL, KC_LCTL, KC_LALT, KC_LGUI,          LWR_SPC,          KC_BSPC,      RSE_SPC,     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, ADJ_BSL
-    ),
-
-    /*
-     * ,--------------------------------------------------------------------------------------------------------.
-     * | Esc  |  `   |  1   |  2   |  3   |  4   |  5   | Num  |  6   |  7   |  8   |  9   |  0   |  [   |  ]   |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Tab      |  '   |  ,   |  .   |  P   |  Y   |  /   |  =   |  F   |  G   |  C   |  R   |  L   |Backspace|
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Ctrl  |  A   |  O   |  E   |  U   |  I   | Home |||||| PgUp |  D   |  H   |  T   |  N   |  S   |   -   |
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Shift|  ;   |  Q   |  J   |  K   |  X   | End  | Del  | PgDn |  B   |  M   |  W   |  V   |  Z   | Enter|
-     * |--------------------------------------------------------------------------------------------------------|
-     * | Fn   | Ctrl  |  Alt  |  Cmd  |  Lower / Space  |  BS  |Raise / Space| Left | Down |  Up  |Right | App  |
-     * `--------------------------------------------------------------------------------------------------------'
-     */
-    [_DVORAK] = LAYOUT(
-        KC_GESC, KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    NUMPAD,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_LBRC, KC_RBRC,
-        KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_SLSH,          KC_EQL,  KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC,
-        CTL_ESC, KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_HOME,          KC_PGUP, KC_D,    KC_H,    KC_T,    KC_N,    MOU_S,   GUI_MIN,
-        KC_LSFT, CTL_SCL, KC_Q,    KC_J,    KC_K,    KC_X,    KC_END,  KC_DEL,  KC_PGDN, KC_B,    KC_M,    KC_W,    KC_V,    CTL_Z,   SFT_ENT,
         ADJ_TIL, KC_LCTL, KC_LALT, KC_LGUI,          LWR_SPC,          KC_BSPC,      RSE_SPC,     KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, ADJ_BSL
     ),
 
@@ -287,7 +126,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______,          _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_PIPE,
         _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,          _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, GUI_DQT,
         _______, KC_PLUS, KC_MINS, KC_EQL,  KC_LCBR, KC_RCBR, _______, _______, _______, KC_LBRC, KC_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
-        _______, _______, _______, _______,          LOWER,            _______,       RSE_ENT,    _______, _______, _______, _______, _______
+        _______, _______, _______, _______,          LOWER,            BASE,        RSE_ENT,      _______, _______, _______, _______, _______
     ),
 
     /*
@@ -308,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______,          _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSLS,
         _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,          _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, GUI_QUO,
         _______, KC_PLUS, KC_MINS, KC_EQL,  KC_LCBR, KC_RCBR, _______, _______, _______, KC_LBRC, KC_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
-        _______, _______, _______, _______,          LWR_BSP,          _______,      RAISE,       _______, _______, _______, _______, _______
+        _______, _______, _______, _______,          LWR_BSP,          BASE,        RAISE,        _______, _______, _______, _______, _______
     ),
 
     /*
@@ -346,10 +185,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `--------------------------------------------------------------------------------------------------------'
      */
     [_MOUSE] = LAYOUT(
-        _______, _______, BASE_V1, BASE_V2, BASE_V3, BASE_V4, BASE_V5, _______, BASE_V6, _______, _______, _______, _______, _______,  _______,
+        _______, _______, BASE,    QWERTY,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,
         _______, _______, KC_BTN3, KC_MS_U, KC_BTN2, _______, _______,          _______, _______, KC_BTN2, KC_WH_U, KC_BTN3, _______,  _______,
         KC_CAPS, KC_BTN1, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN1, AG_NORM,          AG_SWAP, KC_BTN1, KC_WH_L, KC_WH_D, KC_WH_R, _______,  _______,
-        _______, _______, _______, _______, _______, _______, QWERTY,  COLEMAK, DVORAK,  _______, _______, _______, _______, _______,  _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______, _______,  _______,
         _______, _______, _______, _______,          _______,          EPRM,         _______,     _______, _______, _______, _______,  _______
     ),
 
@@ -387,57 +226,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         }
         return false;
         break;
-    case BASE_V1:
+    case BASE:
         if (record->event.pressed) {
-            set_single_persistent_default_layer(_BASE_V1);
-        }
-        return false;
-        break;
-    case BASE_V2:
-        if (record->event.pressed) {
-            set_single_persistent_default_layer(_BASE_V2);
-        }
-        return false;
-        break;
-    case BASE_V3:
-        if (record->event.pressed) {
-            set_single_persistent_default_layer(_BASE_V3);
-        }
-        return false;
-        break;
-    case BASE_V4:
-        if (record->event.pressed) {
-            set_single_persistent_default_layer(_BASE_V4);
-        }
-        return false;
-        break;
-    case BASE_V5:
-        if (record->event.pressed) {
-            set_single_persistent_default_layer(_BASE_V5);
-        }
-        return false;
-        break;
-    case BASE_V6:
-        if (record->event.pressed) {
-            set_single_persistent_default_layer(_BASE_V6);
+            set_single_persistent_default_layer(_BASE);
         }
         return false;
         break;
     case QWERTY:
         if (record->event.pressed) {
             set_single_persistent_default_layer(_QWERTY);
-        }
-        return false;
-        break;
-    case COLEMAK:
-        if (record->event.pressed) {
-            set_single_persistent_default_layer(_COLEMAK);
-        }
-        return false;
-        break;
-    case DVORAK:
-        if (record->event.pressed) {
-            set_single_persistent_default_layer(_DVORAK);
         }
         return false;
         break;
