@@ -14,12 +14,12 @@ enum katana60_layers {
 
 enum katana60_keycodes {
     EPRM = SAFE_RANGE,
-    BASE,
-    QWERTY,
-    LOWER,
-    RAISE,
 };
 
+#define BASE    DF(_BASE)
+#define QWERTY  DF(_QWERTY)
+#define LOWER   MO(_LOWER)
+#define RAISE   MO(_RAISE)
 #define NUMPAD  TG(_NUMPAD)
 #define MOU_SCL LT(_MOUSE, KC_SCLN)     // Turn on _MOUSE layer when held, ; when tapped
 #define MOU_O   LT(_MOUSE, KC_O)        // Turn on _MOUSE layer when held, o when tapped
@@ -49,9 +49,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ,--------------------------------------------------------------------------------------------------------.
      * | =    |  `   |  1   |  2   |  3   |  4   |  5   | Num  |  6   |  7   |  8   |  9   |  0   |  \   |  -   |
      * |--------------------------------------------------------------------------------------------------------|
-     * | Tab      |  Q   |  W   |  E   |  R   |  T   |  [   |  ]   |  Y   |  U   |  I   |  O   |  P   |Backspace|
+     * | Tab     |  Q   |  W   |  E   |  R   |  T   |  [   ||  ]   |  Y   |  U   |  I   |  O   |  P   |Backspace|
      * |--------------------------------------------------------------------------------------------------------|
-     * | Esc   |  A   |  S   |  D   |  F   |  G   | Home |||||| PgUp |  H   |  J   |  K   |  L   |  ;   |   '   |
+     * | Esc   |  A   |  S   |  D   |  F   |  G   | Home ||||||| PgUp |  H   |  J   |  K   |  L   |  ;   |   '  |
      * |--------------------------------------------------------------------------------------------------------|
      * | Shift|  Z   |  X   |  C   |  V   |  B   | End  | Del  | PgDn |  N   |  M   |  ,   |  .   |  /   | Enter|
      * |--------------------------------------------------------------------------------------------------------|
@@ -204,57 +204,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |--------------------------------------------------------------------------------------------------------|
      * |      |       |       |       |                 |      |             |      |      |      |      |      |
      * `--------------------------------------------------------------------------------------------------------'
+     *
+     * [_SAMPLE] = LAYOUT(
+     *     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+     *     _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
+     *     _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
+     *     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+     *     _______, _______, _______, _______,          _______,          _______,      _______,     _______, _______, _______, _______, _______
+     * ),
      */
-    // [_SAMPLE] = LAYOUT(
-    //     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    //     _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
-    //     _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
-    //     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-    //     _______, _______, _______, _______,          _______,          _______,      _______,     _______, _______, _______, _______, _______
-    // ),
 };
 
-// uint32_t layer_state_set_user(uint32_t state) {
-//   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
-// }
+uint32_t layer_state_set_user(uint32_t state)
+{
+    return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+}
 
-bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+bool process_record_user(uint16_t keycode, keyrecord_t* record)
+{
     switch (keycode) {
     case EPRM:
         if (record->event.pressed) {
             eeconfig_init();
-        }
-        return false;
-        break;
-    case BASE:
-        if (record->event.pressed) {
-            set_single_persistent_default_layer(_BASE);
-        }
-        return false;
-        break;
-    case QWERTY:
-        if (record->event.pressed) {
-            set_single_persistent_default_layer(_QWERTY);
-        }
-        return false;
-        break;
-    case LOWER:
-        if (record->event.pressed) {
-            layer_on(_LOWER);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-        } else {
-            layer_off(_LOWER);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-        }
-        return false;
-        break;
-    case RAISE:
-        if (record->event.pressed) {
-            layer_on(_RAISE);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
-        } else {
-            layer_off(_RAISE);
-            update_tri_layer(_LOWER, _RAISE, _ADJUST);
         }
         return false;
         break;
