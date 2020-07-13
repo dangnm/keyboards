@@ -4,6 +4,8 @@ extern keymap_config_t keymap_config;
 
 enum redox_layers {
     _BASE,
+    _EDGE,
+    _SYMBOL,
     _LOWER,
     _RAISE,
     _ADJUST,
@@ -12,9 +14,12 @@ enum redox_layers {
 
 enum redox_keycodes {
     EPRM = SAFE_RANGE,
+    VRSN,
 };
 
 // clang-format off
+#define LOWER   MO(_LOWER)
+#define RAISE   MO(_RAISE)
 #define LWR_PGU LT(_LOWER, KC_PGUP) // Turn on _LOWER layer when held, PgUp when tapped
 #define RSE_END LT(_RAISE, KC_END)  // Turn on _RAISE layer when held, End when tapped
 #define MOU_SCL LT(_MOUSE, KC_SCLN) // Turn on _MOUSE layer when held, ; when tapped
@@ -23,6 +28,9 @@ enum redox_keycodes {
 #define CTL_SCL LCTL_T(KC_SCLN)     // Left Control when held, ; when tapped
 #define CTL_SLS RCTL_T(KC_SLSH)     // Right Control when held, / when tapped
 #define GUI_QUO RGUI_T(KC_QUOT)     // Right Gui when held, ' when tapped
+#define GUI_RBR GUI_T(KC_RBRC)      // Left Gui when held, ] when tapped
+#define ALT_LBR ALT_T(KC_LBRC)      // Left Alt when held, [ when tapped
+#define ALT_LEF ALT_T(KC_LEFT)      // Left Alt when held, Left when tapped
 #define CAG_QUO LCAG_T(KC_QUOT)     // Ctrl+Alt+Gui when held, ' when tapped
 // clang-format on
 
@@ -34,6 +42,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LBRC,                          KC_RBRC, KC_H,    KC_J,    KC_K,    KC_L,    MOU_SCL, GUI_QUO,
         KC_LSFT, CTL_Z,   KC_X,    KC_C,    KC_V,    KC_B,    LWR_PGU, KC_PGDN,        KC_HOME, RSE_END, KC_N,    KC_M,    KC_COMM, KC_DOT,  CTL_SLS, KC_RSFT,
         KC_GRV,  CAG_QUO, KC_LBRC, KC_RBRC,     KC_LGUI,      KC_SPC,  KC_BSPC,        KC_TAB,  KC_ENT,      KC_RALT,      KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    ),
+
+    [_EDGE] = LAYOUT(
+        KC_EQL,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
+        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_DEL,                           KC_ESC,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
+        CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LBRC,                          KC_RBRC, KC_H,    KC_J,    KC_K,    KC_L,    MOU_SCL, GUI_QUO,
+        KC_LSFT, CTL_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_PGUP, KC_PGDN,        KC_HOME, KC_END,  KC_N,    KC_M,    KC_COMM, KC_DOT,  CTL_SLS, KC_RSFT,
+        KC_GRV,  CAG_QUO, ALT_LBR, GUI_RBR,     LOWER,        KC_SPC,  KC_BSPC,        KC_TAB,  KC_ENT,      RAISE,        ALT_LEF, KC_DOWN, KC_UP,   KC_RGHT
+    ),
+
+    [_SYMBOL] = LAYOUT(
+        VRSN,    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
+        KC_DEL,  KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE, _______,                          _______, KC_UP,   KC_7,    KC_8,    KC_9,    KC_ASTR, KC_F12,
+        KC_CAPS, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,  _______,                          _______, KC_DOWN, KC_4,    KC_5,    KC_6,    KC_PLUS, KC_PSCR,
+        _______, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_TILD, _______, _______,        _______, _______, KC_AMPR, KC_1,    KC_2,    KC_3,    KC_BSLS, _______,
+        _______, _______, _______, _______,     _______,      _______, _______,        _______, _______,     _______,      KC_DOT,  KC_0,    KC_EQL,  _______
     ),
 
     [_LOWER] = LAYOUT(
@@ -101,6 +125,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         case _MOUSE:
             set_led_green;
         default:
+            set_led_off;
             break;
     }
     return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
