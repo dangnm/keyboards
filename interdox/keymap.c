@@ -3,7 +3,7 @@
 extern keymap_config_t keymap_config;
 
 enum redox_layers {
-    _QWERTY,
+    _BASE,
     _LOWER,
     _RAISE,
     _ADJUST,
@@ -27,7 +27,7 @@ enum redox_keycodes {
 #define CAG_QUO LCAG_T(KC_QUOT)         // Ctrl+Alt+Gui when held, ' when tapped
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_QWERTY] = LAYOUT(
+    [_BASE] = LAYOUT(
         KC_EQL,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
         KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_DEL,                                    KC_ESC,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
         CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LBRC,                                   KC_RBRC, KC_H,    KC_J,    KC_K,    KC_L,    MOU_SCL, GUI_QUO,
@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_MOUSE] = LAYOUT(
-        _______, _______, _______, _______, _______, _______,                                            _______, _______, _______, _______, _______, _______,
+        RESET,   _______, _______, _______, _______, _______,                                            _______, _______, _______, _______, _______, _______,
         _______, _______, KC_BTN3, KC_MS_U, KC_BTN2, _______, _______,                          _______, _______, KC_BTN2, KC_WH_U, KC_BTN3, _______, _______,
         _______, KC_BTN1, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN1, _______,                          _______, KC_BTN1, KC_WH_L, KC_WH_D, KC_WH_R, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______,        _______, _______, _______, _______, _______, _______, _______, _______,
@@ -91,7 +91,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 // Runs whenever there is a layer state change.
-uint32_t layer_state_set_user(uint32_t state) {
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+        case _BASE:
+            set_led_off;
+            break;
+        case _MOUSE:
+            set_led_green;
+        default:
+            break;
+    }
     return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
 
@@ -105,17 +114,4 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
         break;
     }
     return true;
-}
-
-layer_state_t layer_state_set_user(layer_state_t state) {
-    switch (get_highest_layer(state)) {
-        case _QWERTY:
-            set_led_off;
-            break;
-        case _MOUSE:
-            set_led_green;
-        default:
-            break;
-    }
-    return state;
 }
