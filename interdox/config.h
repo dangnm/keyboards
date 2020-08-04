@@ -1,5 +1,12 @@
 #pragma once
 
+#undef  MANUFACTURER
+#define MANUFACTURER Interdox Wireless
+#undef  PRODUCT
+#define PRODUCT      Interdox_Wireless
+#undef  DESCRIPTION
+#define DESCRIPTION  q.m.k. keyboard firmware for Interdox Wireless
+
 // Copy from ErgoDox EZ
 #define MOUSEKEY_INTERVAL    20
 #define MOUSEKEY_DELAY       0
