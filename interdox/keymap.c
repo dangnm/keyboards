@@ -146,6 +146,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             break;
         case _MOUSE:
             set_led_green;
+            break;
         default:
             set_led_off;
             break;
