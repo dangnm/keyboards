@@ -140,8 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // Runs whenever there is a layer state change.
 layer_state_t layer_state_set_user(layer_state_t state) {
-    layer_state_t new_state = update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
-    switch (get_highest_layer(new_state)) {
+    switch (get_highest_layer(state)) {
         case _BASE:
             set_led_off;
             break;
@@ -151,7 +150,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             set_led_off;
             break;
     }
-    return new_state;
+    return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
