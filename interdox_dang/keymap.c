@@ -3,13 +3,13 @@
 extern keymap_config_t keymap_config;
 
 enum redox_layers {
-    _QWERTY,
-    _SYMBOL,
-    _MOUSE,
+    _LAYOUT0,
+    _LAYOUT1,
+    _LAYOUT2,
 };
 
-#define SYM_GRV LT(_SYMBOL, KC_GRV)     // Turn on _SYMBOL layer when held, ` when tapped
-#define MOU_SCL LT(_MOUSE, KC_SCLN)     // Turn on _MOUSE layer when held, ; when tapped
+#define LA1_GRV LT(_LAYOUT1, KC_GRV)     // Turn on _LAYOUT1 layer when held, ` when tapped
+#define LA2_SCL LT(_LAYOUT2, KC_SCLN)     // Turn on _LAYOUT2 layer when held, ; when tapped
 #define CTL_ESC LCTL_T(KC_ESC)          // Left Control when held, Esc when tapped
 #define CTL_Z   LCTL_T(KC_Z)            // Left Control when held, z when tapped
 #define CTL_SCL LCTL_T(KC_SCLN)         // Left Control when held, ; when tapped
@@ -18,8 +18,10 @@ enum redox_layers {
 #define CAG_QUO LCAG_T(KC_QUOT)         // Ctrl+Alt+Gui when held, ' when tapped
 #define HYP_LBR ALL_T(KC_LBRC)          // Hyper when held, [ when tapped
 #define MEH_RBR MEH_T(KC_RBRC)          // Meh when held, ] when tapped
-#define SYMBOL  TT(_SYMBOL)
+#define LAYOU1  LT(_LAYOUT1,KC_NO)
 #define MEH_NO  MEH_T(KC_NO)
+#define TOGGL1  TO(_LAYOUT1)
+#define TOGGL0  TO(_LAYOUT0)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
@@ -28,19 +30,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      * │  Tab   │   Q    │   W    │   E    │   R    │   T    │   =    │                         │   L1   │   Y    │   U    │   I    │   O    │   P    │   =    │
      * ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     * │Esc/ CTL│   A    │   S    │   D    │   F    │   G    │Hyper/ [│                         │Meh / ] │   H    │   J    │   K    │   L    │ ; / MOU│' / GUI │
+     * │Esc/ CTL│   A    │   S    │   D    │   F    │   G    │Hyper/ [│                         │Meh / ] │   H    │   J    │   K    │   L    │ ; / LA2│' / GUI │
      * ├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      * │ Shift  │Z / CTL │   X    │   C    │   V    │   B    │  LALT  │  Home  │       │  Home  │  Esc   │   N    │   M    │   ,    │   .    │ / / CTL│ Shift  │
      * ├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
      * │ L1 / ` │  CTL   │  ALT   │  MEH   │    │  GUI   │   │ Space  │ BkSpace│       │  Tab   │  Enter │   │  L1    │    │  GUI   │   [    │   ]    │  GUI   │
      * └────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
      */
-    [_QWERTY] = LAYOUT(
-        KC_EQL,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_EQL,                                    SYMBOL,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_EQL,
-        CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    HYP_LBR,                                   MEH_RBR, KC_H,    KC_J,    KC_K,    KC_L,    MOU_SCL, GUI_QUO,
-        KC_LSFT, CTL_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_LALT, KC_HOME,        KC_HOME, KC_ESC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  CTL_SLS, KC_RSFT,
-        SYM_GRV, KC_LCTL, KC_LALT, MEH_NO,      KC_LGUI,      KC_SPC,  KC_BSPC,        KC_TAB,  KC_ENT,      SYMBOL,       KC_RGUI, KC_LBRC, KC_RBRC, KC_RGUI
+    [_LAYOUT0] = LAYOUT(
+        KC_EQL,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                                 KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
+        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_EQL,                           TOGGL1,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
+        CTL_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    HYP_LBR,                          MEH_RBR,   KC_H,    KC_J,    KC_K,    KC_L,    LA2_SCL, GUI_QUO,
+        KC_LSFT, CTL_Z,   KC_X,    KC_C,    KC_V,    KC_B,    KC_LALT, KC_HOME,        KC_HOME, KC_ESC,    KC_N,    KC_M,    KC_COMM, KC_DOT,  CTL_SLS, KC_RSFT,
+        LA1_GRV, KC_LCTL, KC_LALT, MEH_NO,      KC_LGUI,      KC_SPC,  KC_BSPC,        KC_TAB,  KC_ENT,      LAYOU1,         KC_RGUI, KC_LBRC, KC_RBRC, KC_RGUI
     ),
 
     /*
@@ -56,9 +58,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * │        │        │        │        │    │        │   │ LClick │        │       │        │ RClick │   │   0    │    │   0    │        │        │        │
      * └────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
      */
-    [_SYMBOL] = LAYOUT(
+    [_LAYOUT1] = LAYOUT(
         _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                              KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-        KC_CAPS, KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE, KC_VOLU,                          _______, KC_SLSH, KC_AMPR, KC_8,    KC_LPRN, KC_MINS, KC_F12,
+        KC_CAPS, KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE, KC_VOLU,                          TOGGL0,  KC_SLSH, KC_AMPR, KC_8,    KC_LPRN, KC_MINS, KC_F12,
         _______, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,  KC_VOLD,                          _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_PLUS, _______,
         _______, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_TILD, _______, _______,        _______, _______, _______, KC_1,    KC_2,    KC_3,    KC_BSLS, _______,
         _______, _______, _______, _______,     _______,      KC_BTN1, _______,        _______, KC_BTN2,      KC_0,        KC_0,    KC_DOT,  _______, _______
@@ -78,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * │        │        │        │        │    │        │   │        │        │       │        │        │   │        │    │        │        │        │        │
      * └────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
      */
-    [_MOUSE] = LAYOUT(
+    [_LAYOUT2] = LAYOUT(
         _______, _______, _______, _______, _______, _______,                                            _______, _______, _______, _______, _______, _______,
         _______, _______, KC_BTN3, KC_MS_U, KC_BTN2, _______, _______,                          _______, _______, KC_BTN2, KC_WH_U, KC_BTN3, _______, _______,
         _______, KC_BTN1, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN1, _______,                          _______, KC_BTN1, KC_WH_L, KC_WH_D, KC_WH_R, _______, _______,
@@ -104,13 +106,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
-        case _QWERTY:
+        case _LAYOUT0:
             set_led_off;
             break;
-        case _SYMBOL:
+        case _LAYOUT1:
             set_led_red;
             break;
-        case _MOUSE:
+        case _LAYOUT2:
             set_led_green;
         default:
             break;
