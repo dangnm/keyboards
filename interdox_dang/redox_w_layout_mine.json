@@ -91,6 +91,7 @@
       "KC_F9",
       "KC_F10",
       "KC_F11",
+
       "KC_TRNS",
       "KC_EXLM",
       "KC_AT",
@@ -105,6 +106,7 @@
       "KC_WH_U",
       "KC_PMNS",
       "KC_F12",
+
       "KC_CAPS",
       "KC_HASH",
       "KC_DLR",
@@ -119,6 +121,7 @@
       "KC_RGHT",
       "KC_PPLS",
       "KC_MFFD",
+
       "KC_TRNS",
       "KC_PERC",
       "KC_CIRC",
